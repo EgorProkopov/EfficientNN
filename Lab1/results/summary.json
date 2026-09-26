@@ -1,0 +1,38 @@
+{
+  "report": {
+    "calibration": {
+      "flops_median_ape": 0.00011287799731396439,
+      "latency_median_ape": 0.28370247974083584,
+      "memory_median_ape": 0.4770164280304895,
+      "energy_median_ape": 0.2412324206393655,
+      "count": 106
+    },
+    "validation": {
+      "flops_median_ape": 0.00011279600138175102,
+      "latency_median_ape": 0.3045455043499157,
+      "memory_median_ape": 0.4831061785576773,
+      "energy_median_ape": 0.2890592790190833,
+      "count": 26
+    },
+    "oom_count": 0,
+    "oom_comparison": []
+  },
+  "calibrated": {
+    "calibration": {
+      "flops_median_ape": 0.00011287799731396439,
+      "latency_median_ape": 2.057393277758771,
+      "memory_median_ape": 0.4770164280304895,
+      "energy_median_ape": 2.0835121747725793,
+      "count": 106
+    },
+    "validation": {
+      "flops_median_ape": 0.00011279600138175102,
+      "latency_median_ape": 2.833798391609246,
+      "memory_median_ape": 0.4831061785576773,
+      "energy_median_ape": 3.799257552525108,
+      "count": 26
+    },
+    "oom_count": 0,
+    "oom_comparison": []
+  }
+}

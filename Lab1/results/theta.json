@@ -1,0 +1,37 @@
+{
+  "report": {
+    "latency": {
+      "fp32_flops_per_s": 8100000000000.0,
+      "memory_bytes_per_s": 320000000000.0,
+      "mfu": 0.5,
+      "launch_s": 0.0
+    },
+    "energy": {
+      "latency": {
+        "fp32_flops_per_s": 8100000000000.0,
+        "memory_bytes_per_s": 320000000000.0,
+        "mfu": 0.5,
+        "launch_s": 0.0
+      },
+      "power_w": 70.0
+    }
+  },
+  "calibrated": {
+    "latency": {
+      "fp32_flops_per_s": 8100000000000.0,
+      "memory_bytes_per_s": 320000000000.0,
+      "mfu": 0.5,
+      "launch_s": 0.012302150496678979
+    },
+    "energy": {
+      "latency": {
+        "fp32_flops_per_s": 8100000000000.0,
+        "memory_bytes_per_s": 320000000000.0,
+        "mfu": 0.5,
+        "launch_s": 0.012302150496678979
+      },
+      "power_w": 70.0
+    }
+  },
+  "calibrated_parameter": "launch_s only; report mfu, bandwidth and 70 W stay fixed"
+}

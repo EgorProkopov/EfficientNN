@@ -1,0 +1,12 @@
+{
+  "gpu": "Tesla T4",
+  "total_memory_bytes": 15637086208,
+  "python": "3.13.15",
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "cudnn": 91900,
+  "benchmark": false,
+  "cudnn_allow_tf32": false,
+  "matmul_allow_tf32": false,
+  "seed": 19
+}
