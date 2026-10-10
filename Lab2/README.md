@@ -23,9 +23,9 @@
 | Путь к скрипту | Назначение |
 | --- | --- |
 | `scripts/download_babistories.sh` | Загрузка частей архива BabiStories с проверкой контрольных сумм. |
-| `scripts/prepare_babistories.sh` | Токенизация предварительно распакованного датасета. Отдельного скрипта распаковки в проекте нет. |
-| `scripts/run_lm_smoke.sh` | Один шаг обучения и оценки языковой модели. |
-| `upstream/Library/train_memory_mosaics.py` | Исходная точка входа для полноценного обучения. |
+| `scripts/prepare_babistories.sh` | Токенизация предварительно распакованного датасета. |
+| `scripts/run_lm_smoke.sh` | Один шаг обучения и оценки. |
+| `upstream/Library/train_memory_mosaics.py` | Точка входа для полноценного обучения. |
 
 ## Дополнительные проверки
 

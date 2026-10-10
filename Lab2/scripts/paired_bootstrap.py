@@ -78,7 +78,7 @@ def main():
     fig, axes = plt.subplots(1, 2, figsize=(10, 4))
     x = np.arange(len(output))
     for ax, key, ci_key, title in (
-        (axes[0], "delta_accuracy_pp", "accuracy_bootstrap_95_pp", "DFA accuracy"),
+        (axes[0], "delta_accuracy_pp", "accuracy_bootstrap_95_pp", "Accuracy"),
         (axes[1], "delta_tvd_pp", "tvd_bootstrap_95_pp", "TVD"),
     ):
         values = np.array([row[key] for row in output])
@@ -86,9 +86,8 @@ def main():
         ax.errorbar(x, values, yerr=np.vstack((values - intervals[:, 0], intervals[:, 1] - values)), fmt="o", capsize=4)
         ax.axhline(0, color="0.4", linestyle="--", linewidth=1)
         ax.set(xticks=x, xticklabels=[str(row["training_examples"]) for row in output],
-               xlabel="Training DFA examples", ylabel="Epanechnikov − Gaussian, pp", title=title)
+               ylabel="Epanechnikov − Gaussian, п.п.", title=title)
         ax.grid(axis="y", alpha=0.2)
-    fig.suptitle("Paired RegBench test examples, 95% DFA bootstrap intervals")
     fig.tight_layout()
     fig.savefig(ROOT / f"figures/regbench_paired_effects_{tag}.png", dpi=180)
     fig.savefig(ROOT / f"figures/regbench_paired_effects_{tag}.svg")

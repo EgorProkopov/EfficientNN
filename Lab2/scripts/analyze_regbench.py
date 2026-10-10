@@ -10,6 +10,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter, MaxNLocator, NullLocator
 import numpy as np
 
 
@@ -128,10 +129,22 @@ def main():
             points = [(epoch, row[key]) for epoch, row in sorted(data.items()) if key in row]
             ax.plot([p[0] for p in points], [p[1] for p in points], label=label)
         print(result)
-    axes[0].set(ylabel="DFA accuracy", xlabel="Epoch", title=f"RegBench, {training_examples} training examples")
-    axes[1].set(ylabel="Validation loss", xlabel="Epoch", title=f"RegBench, {training_examples} training examples")
+    axes[0].set(ylabel="Accuracy", xlabel="Эпоха", yscale="log")
+    axes[1].set(ylabel="Validation loss", xlabel="Эпоха", yscale="log")
     axes[0].legend()
     axes[1].legend()
+    late_accuracy = [
+        value
+        for line in axes[0].lines
+        for epoch, value in zip(line.get_xdata(), line.get_ydata())
+        if epoch >= 50
+    ]
+    low, high = min(late_accuracy), max(late_accuracy)
+    margin = 0.1 * (high - low)
+    axes[0].set(xlim=(50, 200), ylim=(low - margin, high + margin))
+    axes[0].yaxis.set_major_locator(MaxNLocator(nbins=6))
+    axes[0].yaxis.set_major_formatter(FormatStrFormatter("%.4f"))
+    axes[0].yaxis.set_minor_locator(NullLocator())
     fig.tight_layout()
     fig.savefig(ROOT / f"figures/regbench_{training_examples}_seed0{suffix}.png", dpi=180)
     fig.savefig(ROOT / f"figures/regbench_{training_examples}_seed0{suffix}.svg")

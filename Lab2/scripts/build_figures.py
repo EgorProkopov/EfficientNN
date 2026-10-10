@@ -19,6 +19,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter, MaxNLocator, NullLocator
 import numpy as np
 
 
@@ -110,11 +111,24 @@ def curves(size, tag, strict):
             points = [(epoch, values[key]) for epoch, values in sorted(data.items()) if key in values]
             ax.plot([point[0] for point in points], [point[1] for point in points],
                     label=label, color=COLORS[method])
-    axes[0].set(ylabel="DFA accuracy", xlabel="Epoch", title=f"RegBench, {size} training examples")
-    axes[1].set(ylabel="Validation loss", xlabel="Epoch", title=f"RegBench, {size} training examples")
+    axes[0].set(ylabel="Accuracy", xlabel="Эпоха")
+    axes[1].set(ylabel="Validation loss", xlabel="Эпоха")
     for ax in axes:
+        ax.set_yscale("log")
         ax.legend()
         ax.grid(alpha=0.2)
+    late_accuracy = [
+        value
+        for line in axes[0].lines
+        for epoch, value in zip(line.get_xdata(), line.get_ydata())
+        if epoch >= 50
+    ]
+    low, high = min(late_accuracy), max(late_accuracy)
+    margin = 0.1 * (high - low)
+    axes[0].set(xlim=(50, 200), ylim=(low - margin, high + margin))
+    axes[0].yaxis.set_major_locator(MaxNLocator(nbins=6))
+    axes[0].yaxis.set_major_formatter(FormatStrFormatter("%.4f"))
+    axes[0].yaxis.set_minor_locator(NullLocator())
     save(fig, f"regbench_{size}_seed0{suffix}")
 
 
@@ -127,20 +141,18 @@ def methods(tag, strict):
     fig, axes = plt.subplots(1, 2, figsize=(12, 6.7), sharey=True)
     y = np.arange(len(rows))
     for ax, paper_key, observed_key, title in (
-        (axes[0], "paper_accuracy_percent", "observed_accuracy_percent", "Accuracy ↑"),
-        (axes[1], "paper_tvd_percent", "observed_tvd_percent", "TVD ↓"),
+        (axes[0], "paper_accuracy_percent", "observed_accuracy_percent", "Accuracy"),
+        (axes[1], "paper_tvd_percent", "observed_tvd_percent", "TVD"),
     ):
         for index, row in enumerate(rows):
             ax.plot([row[paper_key], row[observed_key]], [index, index], color="0.7", lw=2)
-        ax.scatter([row[paper_key] for row in rows], y, label="Paper", s=55)
-        ax.scatter([row[observed_key] for row in rows], y, label="Reproduction", marker="x", s=60)
-        ax.set(xlabel="Percent", title=title, yticks=y)
+        ax.scatter([row[paper_key] for row in rows], y, label="Статья", s=55)
+        ax.scatter([row[observed_key] for row in rows], y, label="Эксперимент", marker="x", s=60)
+        ax.set(xlabel="Проценты", title=title, yticks=y)
         ax.grid(axis="x", alpha=0.2)
     axes[0].set_yticklabels([row["label"] for row in rows])
     axes[0].invert_yaxis()
     axes[0].legend(loc="lower right")
-    dataset_note = ", shared DFA set" if tag else ""
-    fig.suptitle(f"RegBench, 1k training examples, seed 0{dataset_note}")
     save(fig, f"regbench_1000_eight_methods{suffix}")
 
 
@@ -152,7 +164,7 @@ def effects(tag, strict):
     x = np.arange(len(rows))
     fig, axes = plt.subplots(1, 2, figsize=(10, 4))
     for ax, key, ci_key, title in (
-        (axes[0], "delta_accuracy_pp", "accuracy_bootstrap_95_pp", "DFA accuracy"),
+        (axes[0], "delta_accuracy_pp", "accuracy_bootstrap_95_pp", "Accuracy"),
         (axes[1], "delta_tvd_pp", "tvd_bootstrap_95_pp", "TVD"),
     ):
         values = np.array([row[key] for row in rows])
@@ -161,9 +173,8 @@ def effects(tag, strict):
         ax.errorbar(x, values, yerr=np.maximum(errors, 0), fmt="o", capsize=4)
         ax.axhline(0, color="0.4", linestyle="--", linewidth=1)
         ax.set(xticks=x, xticklabels=[str(row["training_examples"]) for row in rows],
-               xlabel="Training DFA examples", ylabel="Epanechnikov − Gaussian, pp", title=title)
+               ylabel="Epanechnikov − Gaussian, п.п.", title=title)
         ax.grid(axis="y", alpha=0.2)
-    fig.suptitle("Paired RegBench test examples, 95% DFA bootstrap intervals")
     save(fig, f"regbench_paired_effects_{tag}")
 
 
@@ -179,13 +190,12 @@ def paired_scores(tag, strict):
                      label=label, color=COLORS[method])
         axes[1].plot(SIZES, [100 * row["tvd"] for row in results], marker="o",
                      label=label, color=COLORS[method])
-    axes[0].set(ylabel="DFA accuracy, %", title="Accuracy")
-    axes[1].set(ylabel="TVD, %", title="Total variation distance")
+    axes[0].set(ylabel="Accuracy, %", title="Accuracy")
+    axes[1].set(ylabel="TVD, %", title="TVD")
     for ax in axes:
-        ax.set(xlabel="Training DFA examples", xticks=SIZES)
+        ax.set(xticks=SIZES)
         ax.grid(alpha=0.2)
         ax.legend()
-    fig.suptitle("RegBench on paired test examples")
     save(fig, f"regbench_paired_scores_{tag}")
 
 

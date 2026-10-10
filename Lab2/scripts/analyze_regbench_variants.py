@@ -73,19 +73,18 @@ def main():
     fig, axes = plt.subplots(1, 2, figsize=(12, 6.7), sharey=True)
     y = np.arange(len(comparison))
     for ax, paper_key, observed_key, title in (
-        (axes[0], "paper_accuracy_percent", "observed_accuracy_percent", "Accuracy ↑"),
-        (axes[1], "paper_tvd_percent", "observed_tvd_percent", "TVD ↓"),
+        (axes[0], "paper_accuracy_percent", "observed_accuracy_percent", "Accuracy"),
+        (axes[1], "paper_tvd_percent", "observed_tvd_percent", "TVD"),
     ):
         for index, row in enumerate(comparison):
             ax.plot([row[paper_key], row[observed_key]], [index, index], color="0.7", lw=2)
-        ax.scatter([row[paper_key] for row in comparison], y, label="Paper", s=55)
-        ax.scatter([row[observed_key] for row in comparison], y, label="Reproduction", marker="x", s=60)
-        ax.set(xlabel="Percent", title=title, yticks=y)
+        ax.scatter([row[paper_key] for row in comparison], y, label="Статья", s=55)
+        ax.scatter([row[observed_key] for row in comparison], y, label="Эксперимент", marker="x", s=60)
+        ax.set(xlabel="Проценты", title=title, yticks=y)
         ax.grid(axis="x", alpha=0.2)
     axes[0].set_yticklabels([row["label"] for row in comparison])
     axes[0].invert_yaxis()
     axes[0].legend(loc="lower right")
-    fig.suptitle(f"RegBench, 1k training examples, seed 0{suffix}")
     fig.tight_layout()
     fig.savefig(ROOT / f"figures/regbench_1000_eight_methods{suffix}.png", dpi=180)
     fig.savefig(ROOT / f"figures/regbench_1000_eight_methods{suffix}.svg")
