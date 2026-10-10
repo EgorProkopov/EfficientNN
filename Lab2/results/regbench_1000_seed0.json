@@ -1,0 +1,18 @@
+[
+  {
+    "run": "softmax_1000_seed0_e200",
+    "examples": 500,
+    "tokens": 187848,
+    "dfa_accuracy": 0.9353519867126613,
+    "tvd": 0.3387676898372617,
+    "generation_folder": "runs/regbench/softmax_1000_seed0_e200/generations/199_test_batch"
+  },
+  {
+    "run": "epanechnikov_1000_seed0_e200",
+    "examples": 500,
+    "tokens": 187848,
+    "dfa_accuracy": 0.9388814360546825,
+    "tvd": 0.3274324413758435,
+    "generation_folder": "runs/regbench/epanechnikov_1000_seed0_e200/generations/199_test_batch"
+  }
+]

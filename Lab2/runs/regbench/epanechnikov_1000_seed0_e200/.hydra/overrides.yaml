@@ -1,0 +1,14 @@
+- experiment=dfa/mm
+- dataset.num_examples=1000
+- dataset.num_test_examples=1000
+- model.n_layer=2
+- model.n_embd=128
+- model.n_head=8
+- +model.method=epanechnikov
+- optimizer.lr=1e-4
+- optimizer.weight_decay=0.01
+- train.seed=0
+- trainer.max_epochs=200
+- train.test=true
+- callbacks.model_checkpoint.dirpath=/home/jovyan/yemprokopov/sparse_attention_compact_kernel_regression/checkpoints/regbench/epanechnikov_1000_seed0_e200
+- ~wandb

@@ -1,0 +1,16 @@
+{
+  "label": "second",
+  "python_hash_seed": "0",
+  "train": {
+    "examples": 1000,
+    "sha256": "ca6085a4be57051f013edff2829c457a292bd89d5e61ebd2c9ecc87184776a0a"
+  },
+  "val": {
+    "examples": 500,
+    "sha256": "a48d3f545d6d8110b35f50700b5d0c3d3f9e446b0a3674510b9e9c5df1d94a2a"
+  },
+  "test": {
+    "examples": 500,
+    "sha256": "3f73d0f8650e8ee6af01470ba84bab6b06753a7ebec3732ea70c66d7e04f6358"
+  }
+}

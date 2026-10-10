@@ -1,0 +1,5 @@
+[2026-10-10 10:27:02,730][__main__][INFO] - Instantiating callback <src.callbacks.timer.Timer>
+[2026-10-10 10:27:02,731][__main__][INFO] - Instantiating callback <src.callbacks.params.ParamsLog>
+[2026-10-10 10:27:02,732][__main__][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2026-10-10 10:27:02,734][__main__][INFO] - Instantiating trainer <pytorch_lightning.Trainer>
+[2026-10-10 10:27:15,166][__main__][INFO] - Optimizer group 0 | 34 tensors

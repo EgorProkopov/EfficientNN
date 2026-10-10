@@ -1,0 +1,5 @@
+INFO - 10/10/26 11:14:07 - 0:00:00 - init_from=scratch
+INFO - 10/10/26 11:14:07 - 0:00:00 - tokens per iteration will be: 512
+INFO - 10/10/26 11:14:07 - 0:00:00 -  assuming GPT-2 encodings...
+INFO - 10/10/26 11:14:08 - 0:00:00 - train tokens 474,704,393
+INFO - 10/10/26 11:14:08 - 0:00:00 - defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)

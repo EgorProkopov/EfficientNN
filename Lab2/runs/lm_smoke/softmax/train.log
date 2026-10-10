@@ -1,0 +1,10 @@
+INFO - 10/10/26 11:04:53 - 0:00:00 - init_from=scratch
+INFO - 10/10/26 11:04:53 - 0:00:00 - tokens per iteration will be: 512
+INFO - 10/10/26 11:04:53 - 0:00:00 -  assuming GPT-2 encodings...
+INFO - 10/10/26 11:04:53 - 0:00:00 - train tokens 474,704,393
+INFO - 10/10/26 11:04:53 - 0:00:00 - defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)
+INFO - 10/10/26 11:05:09 - 0:00:16 - iter 0: loss 10.8276, time 1822.87ms / step, total time 0.0 h, remain time 0.0 h, VREM 0.8 GB, utilization 0.0%
+INFO - 10/10/26 11:05:09 - 0:00:16 - [eval] step 1:train_0es loss 10.8254,train loss 10.8254,train_squaremean loss 117.1901,val_0es loss 10.8215,val loss 10.8215,val_squaremean loss 117.1056
+INFO - 10/10/26 11:05:09 - 0:00:16 - saving checkpoint to /home/jovyan/yemprokopov/sparse_attention_compact_kernel_regression/runs/lm_smoke
+INFO - 10/10/26 11:05:10 - 0:00:17 - iter 1: loss 10.8270, time 1251.77ms / step, total time 0.0 h, remain time 0.0 h, VREM 1.0 GB, utilization 1.0%
+INFO - 10/10/26 11:05:10 - 0:00:17 - total time 0.0 h, train loss 10.8254, val loss 10.8215

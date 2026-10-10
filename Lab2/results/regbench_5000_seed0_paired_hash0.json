@@ -1,0 +1,18 @@
+[
+  {
+    "run": "softmax_5000_seed0_e200_paired_hash0",
+    "examples": 500,
+    "tokens": 190654,
+    "dfa_accuracy": 0.943935086596662,
+    "tvd": 0.17467198062114428,
+    "generation_folder": "runs/regbench/softmax_5000_seed0_e200_paired_hash0/generations/199_test_batch"
+  },
+  {
+    "run": "epanechnikov_5000_seed0_e200_paired_hash0",
+    "examples": 500,
+    "tokens": 190654,
+    "dfa_accuracy": 0.9470506781919078,
+    "tvd": 0.16587087885502552,
+    "generation_folder": "runs/regbench/epanechnikov_5000_seed0_e200_paired_hash0/generations/196_test_batch"
+  }
+]

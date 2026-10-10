@@ -1,0 +1,282 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+
+\geometry{paperwidth=200mm,paperheight=112.5mm}
+\usepackage{lmodern}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+\setmainfont{Arial}
+\setsansfont{Arial}
+\newfontfamily\cyrillicfont{Arial}
+\newfontfamily\cyrillicfontsf{Arial}
+\usefonttheme{professionalfonts}
+\usepackage{amsmath,amssymb,booktabs,tabularx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\definecolor{ink}{HTML}{182C43}
+\definecolor{accent}{HTML}{007F82}
+\definecolor{muted}{HTML}{5C6875}
+\definecolor{dense}{HTML}{B86442}
+\definecolor{lightline}{HTML}{DFE5E9}
+\setbeamercolor{normal text}{fg=ink,bg=white}
+\setbeamercolor{structure}{fg=accent}
+\setbeamercolor{frametitle}{fg=ink,bg=white}
+\setbeamercolor{title}{fg=ink}
+\setbeamercolor{itemize item}{fg=accent}
+\setbeamercolor{itemize subitem}{fg=accent}
+\setbeamercolor{footline}{fg=muted}
+\setbeamerfont{frametitle}{size=\fontsize{20}{23}\selectfont,series=\bfseries}
+\setbeamerfont{title}{size=\fontsize{25}{29}\selectfont,series=\bfseries}
+\setbeamerfont{footline}{size=\fontsize{7.5}{9}\selectfont}
+\setbeamersize{text margin left=9mm,text margin right=9mm}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\small\textbullet}
+\setbeamertemplate{itemize subitem}{\small\textbullet}
+\setbeamertemplate{frametitle}{\vspace{3mm}\insertframetitle\par\vspace{1mm}}
+\setbeamertemplate{footline}{%
+  \hfill
+  \insertframenumber\,/\,\inserttotalframenumber\hspace{9mm}\vspace{3mm}}
+\setlength{\parskip}{2pt}
+\AtBeginDocument{%
+  \setlength{\abovedisplayskip}{7pt}%
+  \setlength{\belowdisplayskip}{7pt}%
+  \setlength{\abovedisplayshortskip}{4pt}%
+  \setlength{\belowdisplayshortskip}{5pt}}
+\newcommand{\pos}[1]{\left[#1\right]_{+}}
+\newcommand{\source}[1]{\par\vspace{1.5mm}{\fontsize{7.5}{9}\selectfont\color{muted}#1\par}}
+\newcommand{\takeaway}[1]{\par\vspace{2mm}{\color{accent}\bfseries #1\par}}
+\newcommand{\paper}{\href{https://arxiv.org/pdf/2601.22766v3}{Santos et al., arXiv:2601.22766v3}}
+\newcommand{\mm}{Memory Mosaics}
+
+\begin{document}
+
+% 1
+\begin{frame}[plain]
+  \vspace{5mm}
+  {\usebeamerfont{title}Sparse Attention as\\[1mm]
+  Compact Kernel Regression\par}
+  \vspace{5mm}
+  {\small Saul Santos, Nuno Gonçalves, Daniel C. McNamee,\\
+  Marcos Treviso, André F. T. Martins\par}
+  \vspace{5mm}
+  {\small\phantom{Егор Прокопов}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=south east,inner sep=0pt,font=\small]
+        at ([xshift=-9mm,yshift=9mm]current page.south east) {Егор Прокопов};
+    \end{tikzpicture}}
+\end{frame}
+
+% 2
+\begin{frame}{Главная идея}
+  Модель может лучше извлекать нужную информацию, если присваивать достаточно непохожим
+  ключам ровно нулевой вес.
+
+  Результат работы внимания - получение взвешенной суммы векторов-значений:
+  $$
+    y=\sum_{i=1}^{n}p_i v_i,\qquad p_i\geq 0,\qquad \sum_i p_i=1.
+  $$
+
+  В обычном softmax-механизме внимания веса определяются нормированными скалярными
+  произведениями запроса и ключа. Каждый ключ получает положительный вес.
+  Если ключей много, то их суммарный вклад "ненужных" может уменьшать влияние "полезных". 
+\end{frame}
+
+% 3
+\begin{frame}{Внимание как ядерная регрессия}
+  Веса внимания задает функция близости между запросами и ключами - кернел.
+  $$
+    p_i=\frac{\kappa(q,k_i)}{\sum_j\kappa(q,k_j)},
+    \qquad y(q)=\sum_i p_i v_i.
+  $$
+  
+  Кернел $\kappa\geq 0$ определяет, насколько сильно ключ влияет на ответ.
+
+  При $\|q\|=\|k_i\|=1$ сходство и расстояние связаны:
+  $$
+    s_i=q^{\mathsf T}k_i,
+    \qquad d_i^2 = \|q-k_i\|^2 = 2 - 2qk^\top = 2 - 2s_i.
+  $$
+\end{frame}
+
+% 4
+\begin{frame}{Гауссовское ядро даёт softmax-внимание}
+  Используем ядро с шириной \(h>0\):
+  
+  $$
+    \kappa_{h}(q,k_i)=\exp\!\left(-\frac{\|q-k_i\|^2}{2h^2}\right).
+  $$
+  
+  Для единичных норм:
+  $$
+    \kappa_{h}(q,k_i)
+       =\underbrace{\exp(-1/h^2)}_{\text{общий множитель}}
+        \exp(s_i/h^2).
+  $$
+
+  Общий множитель сокращается при нормировании:
+  $$
+    p_i=\frac{\exp(s_i/h^2)}{\sum_j\exp(s_j/h^2)}
+       =\operatorname{softmax}(s/h^2)_i.
+  $$
+\end{frame}
+
+% 5
+\begin{frame}{Компактное ядро обнуляет дальние ключи}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      Ядро Епанечникова:
+      $$
+        \kappa_h(q,k_i)=
+        \pos{1-\frac{d_i^2}{h^2}}
+      $$
+
+      $[x]_+=\max(0,x)$
+
+      \(h>0\) — радиус отсечения:
+      $$
+        d_i\geq h\ \Longrightarrow\ p_i=0
+      $$
+
+      Близость определяется в пространстве
+      ключей. Можно сказать, что позиция не участвует в вычислении, 
+      но она участвует опосредованно, через трансформирование векторов посредством 
+      позиционного кодирования
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \centering
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=\linewidth,height=46mm,
+          xmin=0,xmax=2.5,ymin=0,ymax=1.08,
+          xlabel={\(d/h\)},ylabel={\(\kappa\)},
+          tick label style={font=\scriptsize},
+          label style={font=\small},
+          axis line style={lightline},
+          grid=major,grid style={lightline},
+          legend style={font=\fontsize{7.5}{9}\selectfont,draw=none,
+            at={(0.98,0.97)},anchor=north east},
+          samples=100]
+          \addplot[dense,very thick,domain=0:2.5]{exp(-x*x/2)};
+          \addlegendentry{Гауссовское}
+          \addplot[accent,very thick,domain=0:1]{1-x*x};
+          \addplot[accent,very thick,domain=1:2.5,forget plot]{0};
+          \addlegendentry{Епанечникова}
+        \end{axis}
+      \end{tikzpicture}
+      {\fontsize{8}{10}\selectfont\color{muted}
+        Формы ядер без констант нормировки.\par}
+    \end{column}
+  \end{columns}
+  Важно: замена ядра меняет механизм внимания, оно не тождественно softmax-вниманию.
+\end{frame}
+
+% 6
+\begin{frame}{Разреженное внимание через компакт-ядра: фиксированный радиус через нормированный ReLU}
+  Подставим $d_i^2=2-2s_i$ в компактное ядро:
+  $$
+    w_i=\pos{1-\frac{2-2s_i}{h^2}}
+       =\frac{2}{h^2}\pos{s_i-c},
+    \qquad c=1-\frac{h^2}{2}.
+  $$
+  После сокращения общего множителя:
+  $$
+    p_i=\frac{\pos{s_i-c}}{\sum_j\pos{s_j-c}}.
+  $$
+  Порог $c$ задаётся заранее выбранным радиусом $h$. 
+  Число активных ключей зависит от их сходства с запросом.
+\end{frame}
+
+% 7
+\begin{frame}{Адаптивный радиус приводит к sparsemax}
+  Введём температуру $\gamma>0$ и перепишем те же веса:
+  $$
+    w_i=\frac{2\gamma}{h^2}
+         \pos{\frac{s_i}{\gamma}-\tau},
+    \qquad \tau=\frac{1}{\gamma}-\frac{h^2}{2\gamma}.
+  $$
+  
+  Выберем $\tau$ так, чтобы сумма выражений в скобках была единицей:
+  $$
+    \sum_i\pos{\frac{s_i}{\gamma}-\tau}=1.
+  $$
+
+  Тогда после нормирования:
+  $$
+    p_i=\pos{\frac{s_i}{\gamma}-\tau}
+       =\operatorname{sparsemax}(s/\gamma)_i,
+    \qquad h^2=2-2\gamma\tau.
+  $$
+  Таким образом, порог и соответствующий ему радиус подстраиваются под текущие ключи.
+\end{frame}
+
+% 8
+\begin{frame}{Top-k наиболее похожих ключей}
+  Сначала вычисляем скалярное произведение запроса с каждым ключом:
+  $$
+    s_i=q^{\mathsf T}k_i,\qquad
+    S_k=\operatorname{TopK}(s),\qquad 1\leq k\leq n.
+  $$
+  $S_k$ - индексы $k$ ключей с наибольшими значениями $s_i$.
+  При единичных нормах это также $k$ ближайших к запросу ключей.
+
+  Остальным ключам присваиваем нулевой вес.
+  
+  top-k softmax нормирует веса выбранных ключей:
+  $$
+    p_i=
+    \begin{cases}
+      \displaystyle\frac{\exp(s_i/\gamma)}
+        {\sum_{j\in S_k}\exp(s_j/\gamma)}, & i\in S_k,\\[2mm]
+      0, & i\notin S_k,
+    \end{cases}
+    \qquad \gamma>0.
+  $$
+  В uniform top-k все выбранные ключи получают одинаковый вес $1/k$.
+\end{frame}
+
+% 9
+\begin{frame}{Сравнение Top-k и ReLUmax}
+  Top-k выбирает $k$ ключей с наибольшим сходством.
+  ReLUmax оставляет ключи, достаточно близкие по сходству к лучшему:
+  
+  $$
+    m = \max_j s_j,\qquad
+    w_i = \pos{b+\frac{s_i-m}{h^2}}^r,
+  $$
+  
+  $$
+    p_i = \frac{w_i}{\sum_j w_j},\quad b,h,r>0.
+  $$
+
+  Ненулевой вес получают ключи, для которых
+  
+  $$
+    s_i > m - bh^2.
+  $$
+  
+  ReLUmax фиксирует допустимое отставание от максимума. 
+  Если почти лучших ключей много, то в вычислении участвуют многие ключи.
+  Если почти лучших ключей мало, то в вычислении участвует мало ключей (преимущественно - только лучшие).
+
+\end{frame}
+
+% 10
+\begin{frame}{Итоги}
+  \begin{itemize}
+    \setlength{\itemsep}{4mm}
+    
+          \item Разреженное внимание можно представить
+          через компакт-кернел. 
+    
+          \item Отсечение слабых совпадений помогает
+          в ряде задач, но результат зависит от нормировки и самой задачи.
+    
+          \item Нулевые веса можно использовать для ускорения вычислений, 
+          но подходяшего раздела в статье нет
+
+  \end{itemize}
+\end{frame}
+
+\end{document}

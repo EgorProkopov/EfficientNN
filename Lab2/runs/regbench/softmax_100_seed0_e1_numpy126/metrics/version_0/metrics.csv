@@ -1,0 +1,6 @@
+timer/validation,step,test/accuracy_ignore_index,test/loss,test/dfa_accuracy,test/perplexity,val/accuracy_ignore_index,val/loss,val/dfa_accuracy,val/perplexity,epoch,timer/epoch,train/accuracy_ignore_index,train/loss,train/perplexity
+0.9094376564025879,0,,,,,,,,,,,,,
+2.537501811981201,1,,,,,,,,,,,,,
+,2,0.10777373611927032,2.955366611480713,0.21016964316368103,19.20876255571953,0.1122969314455986,2.952345371246338,0.22422759234905243,19.150811052258213,0,,,,
+,3,,,,,,,,,,3.084524154663086,,,
+,2,,,,,,,,,0,,0.1332661360502243,2.9447503089904785,19.005915482672993

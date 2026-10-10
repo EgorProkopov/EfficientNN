@@ -1,0 +1,50 @@
+[
+  {
+    "training_examples": 1000,
+    "test_examples": 500,
+    "test_tokens": 187848,
+    "test_sample_sha256": "d0b7854c54aa2b93157230cbf512a4798bf710d104db5e4a5ece6d4f61a3199c",
+    "delta_accuracy_pp": 0.26457561432647675,
+    "accuracy_bootstrap_95_pp": [
+      0.15878761708586536,
+      0.3704514171866106
+    ],
+    "delta_tvd_pp": -1.1351484798127252,
+    "tvd_bootstrap_95_pp": [
+      -1.2151344516659337,
+      -1.058280479036081
+    ]
+  },
+  {
+    "training_examples": 2500,
+    "test_examples": 500,
+    "test_tokens": 188905,
+    "test_sample_sha256": "d9f3e9dcbc76643a6f93f002f486261af93d29cf609049d7c92378f2ff5dfdc7",
+    "delta_accuracy_pp": 0.0667001932188137,
+    "accuracy_bootstrap_95_pp": [
+      -0.04931367259097583,
+      0.18033592599249587
+    ],
+    "delta_tvd_pp": -1.1772588703592168,
+    "tvd_bootstrap_95_pp": [
+      -1.3630035999673509,
+      -1.0259015317891809
+    ]
+  },
+  {
+    "training_examples": 5000,
+    "test_examples": 500,
+    "test_tokens": 190654,
+    "test_sample_sha256": "e7e76edb731f24ba2d16285987c42f761d0a98b28da4c023a690fd75b0fd23e3",
+    "delta_accuracy_pp": 0.3115591595245838,
+    "accuracy_bootstrap_95_pp": [
+      0.1909783863924118,
+      0.4428156724961603
+    ],
+    "delta_tvd_pp": -0.8801101766118827,
+    "tvd_bootstrap_95_pp": [
+      -0.9858809612485118,
+      -0.7758855679433173
+    ]
+  }
+]

@@ -1,0 +1,114 @@
+[
+  {
+    "method": "softmax",
+    "label": "Gaussian",
+    "paper_accuracy_percent": 93.9,
+    "observed_accuracy_percent": 93.3685745922235,
+    "paper_tvd_percent": 34.1,
+    "observed_tvd_percent": 34.3238251759057,
+    "test_examples": 500,
+    "test_tokens": 187848,
+    "sample_sha256": {
+      "val": "d851d3a7cf65c4dfc690c665a91a6f8f123e7123b30b5feaf9fba3934a195225",
+      "test": "d0b7854c54aa2b93157230cbf512a4798bf710d104db5e4a5ece6d4f61a3199c"
+    }
+  },
+  {
+    "method": "epanechnikov",
+    "label": "Epanechnikov / sparsemax",
+    "paper_accuracy_percent": 94.2,
+    "observed_accuracy_percent": 93.63315020654997,
+    "paper_tvd_percent": 32.5,
+    "observed_tvd_percent": 33.188676696092955,
+    "test_examples": 500,
+    "test_tokens": 187848,
+    "sample_sha256": {
+      "val": "d851d3a7cf65c4dfc690c665a91a6f8f123e7123b30b5feaf9fba3934a195225",
+      "test": "d0b7854c54aa2b93157230cbf512a4798bf710d104db5e4a5ece6d4f61a3199c"
+    }
+  },
+  {
+    "method": "biweight",
+    "label": "Biweight / 1.5-entmax",
+    "paper_accuracy_percent": 93.8,
+    "observed_accuracy_percent": 93.59695072611899,
+    "paper_tvd_percent": 33.0,
+    "observed_tvd_percent": 33.2747830544672,
+    "test_examples": 500,
+    "test_tokens": 187848,
+    "sample_sha256": {
+      "val": "d851d3a7cf65c4dfc690c665a91a6f8f123e7123b30b5feaf9fba3934a195225",
+      "test": "d0b7854c54aa2b93157230cbf512a4798bf710d104db5e4a5ece6d4f61a3199c"
+    }
+  },
+  {
+    "method": "triweight",
+    "label": "Triweight / 4/3-entmax",
+    "paper_accuracy_percent": 93.9,
+    "observed_accuracy_percent": 93.5559601379839,
+    "paper_tvd_percent": 32.9,
+    "observed_tvd_percent": 33.442992375436255,
+    "test_examples": 500,
+    "test_tokens": 187848,
+    "sample_sha256": {
+      "val": "d851d3a7cf65c4dfc690c665a91a6f8f123e7123b30b5feaf9fba3934a195225",
+      "test": "d0b7854c54aa2b93157230cbf512a4798bf710d104db5e4a5ece6d4f61a3199c"
+    }
+  },
+  {
+    "method": "relumax",
+    "label": "Epanechnikov / 1-ReLUmax",
+    "paper_accuracy_percent": 93.8,
+    "observed_accuracy_percent": 93.48356117712193,
+    "paper_tvd_percent": 36.8,
+    "observed_tvd_percent": 36.96984812828699,
+    "test_examples": 500,
+    "test_tokens": 187848,
+    "sample_sha256": {
+      "val": "d851d3a7cf65c4dfc690c665a91a6f8f123e7123b30b5feaf9fba3934a195225",
+      "test": "d0b7854c54aa2b93157230cbf512a4798bf710d104db5e4a5ece6d4f61a3199c"
+    }
+  },
+  {
+    "method": "norm_relu",
+    "label": "Epanechnikov / normReLU",
+    "paper_accuracy_percent": 84.3,
+    "observed_accuracy_percent": 83.60855585366892,
+    "paper_tvd_percent": 43.6,
+    "observed_tvd_percent": 44.14824281812441,
+    "test_examples": 500,
+    "test_tokens": 187848,
+    "sample_sha256": {
+      "val": "d851d3a7cf65c4dfc690c665a91a6f8f123e7123b30b5feaf9fba3934a195225",
+      "test": "d0b7854c54aa2b93157230cbf512a4798bf710d104db5e4a5ece6d4f61a3199c"
+    }
+  },
+  {
+    "method": "top16_softmax",
+    "label": "Gaussian kNN, k=16",
+    "paper_accuracy_percent": 93.4,
+    "observed_accuracy_percent": 93.33077807589115,
+    "paper_tvd_percent": 33.3,
+    "observed_tvd_percent": 33.32121198570585,
+    "test_examples": 500,
+    "test_tokens": 187848,
+    "sample_sha256": {
+      "val": "d851d3a7cf65c4dfc690c665a91a6f8f123e7123b30b5feaf9fba3934a195225",
+      "test": "d0b7854c54aa2b93157230cbf512a4798bf710d104db5e4a5ece6d4f61a3199c"
+    }
+  },
+  {
+    "method": "top16_uniform",
+    "label": "Uniform kNN, k=16",
+    "paper_accuracy_percent": 84.6,
+    "observed_accuracy_percent": 84.0977811847877,
+    "paper_tvd_percent": 41.1,
+    "observed_tvd_percent": 41.55586085368122,
+    "test_examples": 500,
+    "test_tokens": 187848,
+    "sample_sha256": {
+      "val": "d851d3a7cf65c4dfc690c665a91a6f8f123e7123b30b5feaf9fba3934a195225",
+      "test": "d0b7854c54aa2b93157230cbf512a4798bf710d104db5e4a5ece6d4f61a3199c"
+    }
+  }
+]
