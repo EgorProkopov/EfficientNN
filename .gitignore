@@ -3,3 +3,5 @@
 /Lab2/venv
 /Lab2/__pycache__
 /Lab2/.nv
+/Lab2/upstream/Library/memory_mosaics/data/BabiStories/train.bin
+/Lab2/upstream/Library/memory_mosaics/data/BabiStories/val.bin
