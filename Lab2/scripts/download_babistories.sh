@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 revision=191158129c8dab3637769988e336009a9bc5d4f2
 base="https://raw.githubusercontent.com/facebookresearch/MemoryMosaics/$revision/BabiStories/data"
 dest="$ROOT/data/BabiStories/archive"

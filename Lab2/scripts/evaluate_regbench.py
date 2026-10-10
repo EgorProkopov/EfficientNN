@@ -5,7 +5,7 @@ from pathlib import Path
 from omegaconf import OmegaConf
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "seq_icl"))
 from train import SequenceLightningModule, create_trainer  # noqa: E402
 from src.utils.train import process_config  # noqa: E402

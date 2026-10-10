@@ -2,7 +2,7 @@
 set -euo pipefail
 
 source /etc/profile.d/wm.sh
-ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 export HOME="$ROOT"
 export XDG_CACHE_HOME="$ROOT/cache"
 export XDG_CONFIG_HOME="$ROOT/cache/config"

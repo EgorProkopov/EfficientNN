@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 method="${1:?attention method required}"
 tag="${2:-}"
 name="${method}${tag:+_$tag}"
 out_dir="$ROOT/runs/lm_smoke${tag:+_$tag}"
-source "$ROOT/env.sh"
+source "$ROOT/scripts/env.sh"
 mkdir -p "$out_dir"
 cd "$ROOT/upstream/Library"
 set +e

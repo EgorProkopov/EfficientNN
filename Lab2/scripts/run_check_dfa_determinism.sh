@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$ROOT/env.sh"
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+source "$ROOT/scripts/env.sh"
 cd "$ROOT"
 set +e
 for label in first second; do
-    PYTHONHASHSEED=0 "$ROOT/venv/bin/python" "$ROOT/check_dfa_determinism.py" "$label" \
+    PYTHONHASHSEED=0 "$ROOT/venv/bin/python" "$ROOT/scripts/check_dfa_determinism.py" "$label" \
         2>&1 | tee "$ROOT/logs/check_dfa_determinism_${label}.log"
     status="${PIPESTATUS[0]}"
     if [[ "$status" -ne 0 ]]; then

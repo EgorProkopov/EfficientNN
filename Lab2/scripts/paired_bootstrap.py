@@ -11,7 +11,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from Lab2.scripts.analyze_regbench import ROOT, Vocab, get_dfa_probs
+from analyze_regbench import ROOT, Vocab, get_dfa_probs
 
 
 def contributions(run):

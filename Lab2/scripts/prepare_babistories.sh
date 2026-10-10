@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$ROOT/env.sh"
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+source "$ROOT/scripts/env.sh"
 cd "$ROOT/data/BabiStories/extracted"
 set +e
 "$ROOT/venv/bin/python" "$ROOT/upstream/Library/memory_mosaics/data/BabiStories/prepare.py" \

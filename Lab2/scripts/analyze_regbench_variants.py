@@ -9,10 +9,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from Lab2.scripts.analyze_regbench import final_metrics
+from analyze_regbench import final_metrics
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 METHODS = (
     ("softmax", "Gaussian", 93.9, 34.1),
     ("epanechnikov", "Epanechnikov / sparsemax", 94.2, 32.5),
